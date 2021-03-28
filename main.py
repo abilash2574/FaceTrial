@@ -1,16 +1,35 @@
-# This is a sample Python script.
+import face_recognition
+import numpy as np
+import cv2
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# imgOriginal = face_recognition.load_image_file()
+# imgOriginal = cv2.cvtColor(imgOriginal, cv2.COLOR_BGR2RGB)
 
+"""
+ In this we will learn how to work with openCV, the basic and other functions related to this project.
+"""
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+img = cv2.imread("images/Gary-vee.png", 1)  # This is used for reading a image from a directory.
 
+cv2.imshow('images', img)  # This is used to output the image.
+cv2.waitKey(0)  # This is used so that the image is displayed until a keystroke is pressed.
+cv2.destroyAllWindows()  # This destroys all the windows that are opened.
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+cam = cv2.VideoCapture(0)  # This is used to capture the video
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+while (cam.isOpened()):
+
+    ret, frame = cam.read()
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    cv2.imshow('From video', gray)
+    if cv2.waitKey(1) == ord('s'):
+        cv2.imwrite('my_image.png', frame)
+        print('save')
+    elif cv2.waitKey(1) == ord('q'):
+        print('quit')
+        break
+
+cam.release()
+cv2.destroyAllWindows()
