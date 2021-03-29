@@ -1,5 +1,3 @@
-import face_recognition
-import numpy as np
 import cv2
 
 # imgOriginal = face_recognition.load_image_file()
@@ -17,19 +15,14 @@ cv2.destroyAllWindows()  # This destroys all the windows that are opened.
 
 cam = cv2.VideoCapture(0)  # This is used to capture the video
 
-while (cam.isOpened()):
+while True:  # We create a infinite loop that lets us show each frames that are captured from the camera
 
-    ret, frame = cam.read()
+    ret, frame = cam.read()  # We Read the camera
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # We use this to change the BGR to Gray
 
-    cv2.imshow('From video', gray)
-    if cv2.waitKey(1) == ord('s'):
-        cv2.imwrite('my_image.png', frame)
-        print('save')
-    elif cv2.waitKey(1) == ord('q'):
-        print('quit')
+    cv2.imshow('From video', frame)     # This is used to show the image in the window
+    if cv2.waitKey(1) == ord('q'):  # use this to quit the loop: ord() is a function that let us match the character
         break
-
 cam.release()
 cv2.destroyAllWindows()
