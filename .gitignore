@@ -2,4 +2,3 @@ venv/
 my_image.png
 output.avi
 images/*
-encode_data.csv
